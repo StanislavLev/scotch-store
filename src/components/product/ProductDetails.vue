@@ -2,15 +2,31 @@
   <div class="product-details">
     <div class="container">
       <div class="row">
-        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 product-details__image">
+        <div class="col-xs-12" v-show="zoomImg">
           <img
-            class="img-responsive" :src="product.image" alt="">
+            class="img-responsive" :src="product.image" alt="" @click="zoomImg=false" width=100%>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12" v-show="!zoomImg">
+          <img
+            class="img-responsive" :src="product.image" alt="" @click="zoomImg=true">
         </div>
         <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12 product-details__info">
           <div class="product-details__description">
             <small>{{product.manufacturer && product.manufacturer.name}}</small>
             <h3>{{product.name}}</h3>
-            <p>
+            <div class="row" v-if="product.description.length > 200">
+              <div class="col-sm-6 col-xs-12" v-if="product.description.length > 100">
+                <p>
+                  {{product.description.slice(0, (product.description.slice(product.description.length/2).indexOf(" "))+(product.description.length/2))}}
+                </p>
+              </div>  
+              <div class="col-sm-6 col-xs-12">
+                <p>
+                  {{product.description.slice((product.description.slice(product.description.length/2).indexOf(" "))+(product.description.length/2))}}
+                </p>
+              </div>  
+            </div>
+            <p v-else>
               {{product.description}}
             </p>
           </div>
@@ -30,18 +46,24 @@
     props: ['product'],
     components: {
       'product-button': ProductButton
+    },
+    data () {
+      return {
+        zoomImg: false
+      }
     }
   }
 </script>
 
 <style>
+
   .product-details {
     border-bottom: 2px solid #F5F5F5;
     padding: 30px 0;
   }
 
-  .product-details__image {
-
+  .product-details img:hover {
+    cursor: pointer;
   }
 
   .product-details__description {

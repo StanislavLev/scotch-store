@@ -90,7 +90,6 @@
     },
     methods: {
       saveProduct () {
-        console.log(this.fields.valid())
         this.$validator.validateAll().then(() => {
           this.$emit('save-product', this.model)
         }).catch(() => {

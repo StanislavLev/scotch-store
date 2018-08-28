@@ -12,7 +12,7 @@
             </thead>
             <tbody>
             <tr v-for="product in products">
-              <td>{{product.name}}</td>
+              <td>{{product.name}} - {{product.name.replace(/[^A-Za-z0-9]/g, "").length}}</td>
               <td>${{product.price}}</td>
               <td>{{product.manufacturer.name}}</td>
               <td><router-link :to="'/admin/edit/'+product._id"><i class="fa fa-pencil-square-o"></i></router-link></td>
