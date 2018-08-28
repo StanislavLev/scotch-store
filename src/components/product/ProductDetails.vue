@@ -10,30 +10,16 @@
           <img
             class="img-responsive" :src="product.image" alt="" @click="zoomImg=true">
         </div>
-        <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12 product-details__info">
-          <div class="product-details__description">
-            <small>{{product.manufacturer && product.manufacturer.name}}</small>
-            <h3>{{product.name}}</h3>
-            <div class="row" v-if="product.description.length > 200">
-              <div class="col-sm-6 col-xs-12" v-if="product.description.length > 100">
-                <p>
-                  {{product.description.slice(0, (product.description.slice(product.description.length/2).indexOf(" "))+(product.description.length/2))}}
-                </p>
-              </div>  
-              <div class="col-sm-6 col-xs-12">
-                <p>
-                  {{product.description.slice((product.description.slice(product.description.length/2).indexOf(" "))+(product.description.length/2))}}
-                </p>
-              </div>  
-            </div>
-            <p v-else>
-              {{product.description}}
-            </p>
-          </div>
-          <div class="product-details__price-cart">
-            <p>${{product.price}}</p>
-            <product-button :product="product"></product-button>
-          </div>
+        <div class="col-lg-4 col-md-4 col-sm-3 col-xs-6">
+          <p>
+            <small>Details:</small><br/> {{product.description}}
+          </p>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-3 col-xs-6">
+          <h3>{{product.name}}</h3>
+          <p><small>Manufacturer: {{product.manufacturer && product.manufacturer.name}}</small></p>
+          <p><small>Price:</small> ${{product.price}}</p>
+          <product-button :product="product"></product-button>
         </div>
       </div>
     </div>
@@ -59,33 +45,19 @@
 
   .product-details {
     border-bottom: 2px solid #F5F5F5;
-    padding: 30px 0;
+    padding-top: 30px;
   }
 
   .product-details img:hover {
     cursor: pointer;
   }
 
-  .product-details__description {
-    padding-top: 30px;
-  }
-
-  .product-details__description small {
+  .product-details small {
     color: #808080;
   }
-
-  .product-details__description h3 {
-    margin: 5px 0 30px 0;
+  
+  .product-details h3 {
+    margin: 0 0 10px;
   }
 
-  .product-details__price-cart {
-    display: flex;
-    padding-top: 30px;
-  }
-
-  .product-details__price-cart p {
-    flex-grow: 2;
-    font-size: 20px;
-    font-weight: bold;
-  }
 </style>
